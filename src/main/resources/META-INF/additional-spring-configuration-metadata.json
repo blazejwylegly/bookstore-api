@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "hibernate.dialect",
+      "type": "java.lang.String",
+      "description": "Description for hibernate.dialect."
+    },
+    {
+      "name": "c3p0.connection.pool.initialPoolSize",
+      "type": "java.lang.String",
+      "description": "Description for c3p0.connection.pool.initialPoolSize."
+    }
+  ] }
