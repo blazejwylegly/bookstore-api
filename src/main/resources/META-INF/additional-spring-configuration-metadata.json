@@ -9,5 +9,15 @@
       "name": "c3p0.connection.pool.initialPoolSize",
       "type": "java.lang.String",
       "description": "Description for c3p0.connection.pool.initialPoolSize."
+    },
+    {
+      "name": "SPRING_DATASOURCE_URL",
+      "type": "java.lang.String",
+      "description": "Description for SPRING_DATASOURCE_URL."
+    },
+    {
+      "name": "SPRING_DATASOURCE_PASSWORD",
+      "type": "java.lang.String",
+      "description": "Description for SPRING_DATASOURCE_PASSWORD."
     }
   ] }
