@@ -35,13 +35,13 @@ public class ProdConfiguration {
                 // Configure data source
 
                 dataSource.setJdbcUrl(
-                        environment.getRequiredProperty("spring.datasource.url")
+                        environment.getRequiredProperty("SPRING_DATASOURCE_URL")
                 );
                 dataSource.setUser(
-                        environment.getRequiredProperty("spring.datasource.username")
+                        environment.getRequiredProperty("SPRING_DATASOURCE_USERNAME")
                 );
                 dataSource.setPassword(
-                        environment.getRequiredProperty("spring.datasource.password")
+                        environment.getRequiredProperty("SPRING_DATASOURCE_PASSWORD")
                 );
 
                 // Configure connection pool properties

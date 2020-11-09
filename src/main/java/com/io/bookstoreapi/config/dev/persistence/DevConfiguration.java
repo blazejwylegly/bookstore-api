@@ -2,6 +2,7 @@ package com.io.bookstoreapi.config.dev.persistence;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -22,6 +23,16 @@ public class DevConfiguration {
         @Autowired
         private Environment environment;
 
+//        @Value(value = "${DB_URL}")
+//        private String url;
+//
+//        @Value(value = "${DB_PASSWORD}")
+//        private String pwd;
+//
+//        @Value(value = "${DB_USERNAME}")
+//        private String usr;
+
+
         private final Logger logger = Logger.getLogger(this.getClass().getName());
         // Define Data source
         @Bean
@@ -38,15 +49,26 @@ public class DevConfiguration {
                         logger.warning("Could not load database driver!");
                 }
                 // Configure jdbc properties
+//
+//
+//                dataSource.setJdbcUrl(
+//                        this.url
+//                );
+//                dataSource.setUser(
+//                        this.usr
+//                );
+//                dataSource.setPassword(
+//                        this.pwd
+//                );
 
                 dataSource.setJdbcUrl(
-                        environment.getRequiredProperty("spring.datasource.url")
+                        environment.getRequiredProperty("SPRING_DATASOURCE_URL")
                 );
                 dataSource.setUser(
-                        environment.getRequiredProperty("spring.datasource.username")
+                        environment.getRequiredProperty("SPRING_DATASOURCE_USERNAME")
                 );
                 dataSource.setPassword(
-                        environment.getRequiredProperty("spring.datasource.password")
+                        environment.getRequiredProperty("SPRING_DATASOURCE_PASSWORD")
                 );
 
                 // Configure connection pool properties
