@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.http.HttpResponse;
 import java.security.Principal;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
@@ -35,6 +36,12 @@ public class LoginController {
         return userService.getAllUsers();
     }
 
+    @GetMapping("/getUser")
+    public Optional<User> getUser(
+            @RequestParam(name = "id") int id
+    ){
+        return userService.getUser(id);
+    }
 
     @PostMapping("/signUp")
     public ResponseEntity<?> registerUserAccount(

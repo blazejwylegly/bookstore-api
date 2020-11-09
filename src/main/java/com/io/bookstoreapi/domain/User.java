@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Collection;
 
 @Entity
-@Table(name = "user", schema = "public")
+@Table(name = "user")
 public class User implements UserDetails, Serializable {
 
     @Id
