@@ -1,17 +1,9 @@
 package com.io.bookstoreapi.data.repositories;
 
 import com.io.bookstoreapi.domain.User;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 public class CustomUserRepositoryImpl implements CustomUserRepository{
 
@@ -19,13 +11,29 @@ public class CustomUserRepositoryImpl implements CustomUserRepository{
     private EntityManager entityManager;
 
     @Override
-    public User findByEmailAddress( @Param("email") String emailAddress){
+    public User findByEmailAddress( String emailAddress){
 
-        return null;
+        return entityManager.createQuery("select u from User u " +
+                "where u.emailAddress like :mail", User.class)
+                .setParameter("mail", emailAddress)
+                .getSingleResult();
     }
 
     @Override
     public User findByUsername(String username) {
-        return null;
+        return entityManager.createQuery("select u from User u " +
+                "where u.emailAddress like :username", User.class)
+                .setParameter("username", username)
+                .getSingleResult();
+    }
+
+    @Override
+    public boolean existsByEmailAddress(String emailAddress) {
+        return findByEmailAddress(emailAddress) == null;
+    }
+
+    @Override
+    public boolean existsByUsername(String username) {
+        return findByUsername(username) == null;
     }
 }
