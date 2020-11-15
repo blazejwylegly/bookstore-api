@@ -3,6 +3,7 @@ package com.io.bookstoreapi.data.service;
 import com.io.bookstoreapi.data.repositories.UserRepository;
 import com.io.bookstoreapi.domain.User;
 
+import com.io.bookstoreapi.exceptions.UserAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -32,8 +33,7 @@ public class UserService implements UserDetailsService {
     }
 
     public User saveUser(User user) {
-//        if(userRepository.existsByUsername(user.getUsername())) return user;
-//        else if(userRepository.existsByEmailAddress(user.getEmailAddress())) return user;
+        if(userExists(user)) throw new UserAlreadyExistsException();
 
         user.setPassword(
                 passwordEncoder.encode(user.getPassword())

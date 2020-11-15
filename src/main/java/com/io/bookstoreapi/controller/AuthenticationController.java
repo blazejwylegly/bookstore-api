@@ -61,16 +61,9 @@ public class AuthenticationController {
             @RequestBody User user
     ){
         user.setId(0);
-        if(userService.userExists(user)){
-
-            return ResponseEntity
-                    .unprocessableEntity()
-                    .body("User with that username and/or email already exists");
-        }else{
-            user = userService.saveUser(user);
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(user);
-        }
+        userService.saveUser(user);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(user);
     }
 
     @PostMapping(
