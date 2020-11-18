@@ -11,6 +11,8 @@ import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 import static org.mockito.Mockito.when;
 
@@ -39,6 +41,13 @@ public class UserServiceTests {
         when(SUT.saveUser(user)).thenReturn(user);
     }
 
+    @Test
+    public void test_saveUser(){
+        User user=new User("kamil","kamil","kamil@kamil.pl");
+        when(userRepository.save(Mockito.any(User.class)))
+                .thenAnswer(i -> i.getArguments()[0]);
+        assertEquals(user,SUT.saveUser(user));
+    }
 
 
 
