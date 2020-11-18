@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -23,15 +23,17 @@ public class UserService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Transactional
     public Optional<User> getUser(int id){
         return userRepository.findById(id);
     }
 
-
+    @Transactional
     public Iterable<User> getAllUsers() {
         return userRepository.findAll();
     }
 
+    @Transactional
     public User saveUser(User user) {
         if(userExists(user)) throw new UserAlreadyExistsException();
 
@@ -43,10 +45,12 @@ public class UserService implements UserDetailsService {
 
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return userRepository.findByUsername(s);
     }
 
+    @Transactional
     public boolean userExists(User user){
         return userRepository.existsByEmailAddress(user.getEmailAddress()) ||
                 userRepository.existsByUsername(user.getUsername());

@@ -1,13 +1,11 @@
 package com.io.bookstoreapi.domain;
 
-import com.fasterxml.jackson.core.SerializableString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.HashSet;
@@ -18,7 +16,7 @@ import java.util.Set;
         name = "user",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "username"),
-                @UniqueConstraint(columnNames = "mail")
+                @UniqueConstraint(columnNames = "email")
         })
 public class User implements UserDetails, Serializable {
 
@@ -38,11 +36,11 @@ public class User implements UserDetails, Serializable {
     @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "second_name")
-    private String secondName;
+    @Column(name = "last_name")
+    private String lastName;
 
     @NotBlank
-    @Column(name = "mail")
+    @Column(name = "email")
     @Email
     private String emailAddress;
 
@@ -109,12 +107,12 @@ public class User implements UserDetails, Serializable {
         this.firstName = firstName;
     }
 
-    public String getSecondName() {
-        return secondName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
+    public void setLastName(String secondName) {
+        this.lastName = secondName;
     }
 
     public String getEmailAddress() {
@@ -143,17 +141,17 @@ public class User implements UserDetails, Serializable {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
