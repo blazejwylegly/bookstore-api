@@ -76,8 +76,6 @@ public class AuthenticationController {
                 .body(user);
     }
 
-
-
     @RequestMapping("/user")
     public Principal user(Principal user){
         return user;

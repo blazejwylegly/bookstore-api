@@ -18,14 +18,18 @@ import java.util.Optional;
 @Service
 public class UserService implements UserDetailsService {
 
-   public UserService(){}
-
-   public UserService(UserRepository repository,PasswordEncoder encoder){userRepository=repository; passwordEncoder=encoder;}
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    public UserService(){}
+
+    public UserService(UserRepository repository, PasswordEncoder encoder){
+        userRepository = repository;
+        passwordEncoder = encoder;
+    }
 
     @Transactional
     public Optional<User> getUser(int id){
@@ -39,18 +43,14 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public User saveUser(User user) {
-        if(user!=null){
+        if(user == null ) throw new UserIsNullException();
         if(userExists(user)) throw new UserAlreadyExistsException();
 
         user.setPassword(
                 passwordEncoder.encode(user.getPassword())
         );
-        return userRepository.save(user);}
-        else{
-            throw new UserIsNullException();
-        }
+        return userRepository.save(user);
     }
-
 
     @Override
     @Transactional
