@@ -18,7 +18,6 @@ import javax.validation.Valid;
 import java.security.Principal;
 import java.util.Optional;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
 public class AuthenticationController {
