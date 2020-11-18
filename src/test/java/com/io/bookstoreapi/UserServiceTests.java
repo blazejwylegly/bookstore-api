@@ -38,7 +38,7 @@ public class UserServiceTests {
     public void test_addUser_when_that_user_already_exists()
     {   User user=new User("kamil","kamil","kamil@kamil.pl");
         when(userRepository.existsByEmailAddress(user.getEmailAddress())).thenReturn(true);
-        when(SUT.saveUser(user)).thenReturn(user);
+        SUT.saveUser(user);
     }
 
     @Test
